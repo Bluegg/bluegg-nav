@@ -5,12 +5,13 @@
 class Nav {
 
 	// Include default values for options
-	constructor({nav = '.js-nav', trigger = '.js-nav-trigger', openClass = 'js-mobile-nav-open'}) {
+	constructor({nav = '.js-nav', trigger = '.js-nav-trigger', openClass = 'is-open', bodyClass = 'js-mobile-nav-open'}) {
 
 		// Store the options
 		this.nav = document.querySelector(nav);
 		this.trigger = document.querySelector(trigger);
 		this.openClass = openClass;
+		this.bodyClass = bodyClass;
 
 		// Need to bind the methods to the current scope so we can cleanly add/remove the event handlers
 		this.open = this.open.bind(this);
@@ -23,7 +24,8 @@ class Nav {
 
 	// Add the class to the body, toggle the event listener
 	open() {
-		document.documentElement.classList.add(this.openClass);
+		document.documentElement.classList.add(this.bodyClass);
+		this.nav.classList.add(this.openClass);
 		window.scrollTo(0, 0);
 		this.trigger.removeEventListener('click', this.open, false);
 		this.trigger.addEventListener('click', this.close, false);
@@ -32,7 +34,8 @@ class Nav {
 	close() {
 		this.trigger.removeEventListener('click', this.close, false);
 		this.trigger.addEventListener('click', this.open, false);
-		document.documentElement.classList.remove(this.openClass);
+		this.nav.classList.remove(this.openClass);
+		document.documentElement.classList.remove(this.bodyClass);
 	}
 
 	// check if the toggle ishidden, if it is then we can assume the nav shouldn't be Javascript powered
