@@ -21,7 +21,9 @@ var Nav = function () {
 		var _ref$trigger = _ref.trigger;
 		var trigger = _ref$trigger === undefined ? '.js-nav-trigger' : _ref$trigger;
 		var _ref$openClass = _ref.openClass;
-		var openClass = _ref$openClass === undefined ? 'js-mobile-nav-open' : _ref$openClass;
+		var openClass = _ref$openClass === undefined ? 'is-open' : _ref$openClass;
+		var _ref$bodyClass = _ref.bodyClass;
+		var bodyClass = _ref$bodyClass === undefined ? 'js-mobile-nav-open' : _ref$bodyClass;
 
 		_classCallCheck(this, Nav);
 
@@ -29,6 +31,7 @@ var Nav = function () {
 		this.nav = document.querySelector(nav);
 		this.trigger = document.querySelector(trigger);
 		this.openClass = openClass;
+		this.bodyClass = bodyClass;
 
 		// Need to bind the methods to the current scope so we can cleanly add/remove the event handlers
 		this.open = this.open.bind(this);
@@ -45,7 +48,8 @@ var Nav = function () {
 	_createClass(Nav, [{
 		key: 'open',
 		value: function open() {
-			document.documentElement.classList.add(this.openClass);
+			document.documentElement.classList.add(this.bodyClass);
+			this.nav.classList.add(this.openClass);
 			window.scrollTo(0, 0);
 			this.trigger.removeEventListener('click', this.open, false);
 			this.trigger.addEventListener('click', this.close, false);
@@ -57,7 +61,8 @@ var Nav = function () {
 		value: function close() {
 			this.trigger.removeEventListener('click', this.close, false);
 			this.trigger.addEventListener('click', this.open, false);
-			document.documentElement.classList.remove(this.openClass);
+			this.nav.classList.remove(this.openClass);
+			document.documentElement.classList.remove(this.bodyClass);
 		}
 
 		// check if the toggle ishidden, if it is then we can assume the nav shouldn't be Javascript powered
