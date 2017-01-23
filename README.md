@@ -15,10 +15,10 @@ var Nav = require('bluegg-nav');
 var defaultNav = new Nav();
 
 var optionsNav = new Nav({
-	nav: '.nav--primary', // should be unique
-	trigger: '#primary-nav-trigger', // should be unique
-	openClass: 'nav-open',
-	bodyClass: 'nav-is-open'
+	nav: '.js-nav', // should be unique
+	trigger: '.js-nav-trigger', // should be unique
+	openClass: 'is-open',
+	bodyClass: 'js-mobile-nav-open'
 });
 ```
 
