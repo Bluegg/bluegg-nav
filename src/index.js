@@ -23,7 +23,8 @@ class Nav {
 	}
 
 	// Add the class to the body, toggle the event listener
-	open() {
+	open(e) {
+		e.preventDefault();
 		document.documentElement.classList.add(this.bodyClass);
 		this.nav.classList.add(this.openClass);
 		window.scrollTo(0, 0);
@@ -31,7 +32,8 @@ class Nav {
 		this.trigger.addEventListener('click', this.close, false);
 	}
 	// Remove the class to the body, toggle the event listener
-	close() {
+	close(e) {
+		e.preventDefault();
 		this.trigger.removeEventListener('click', this.close, false);
 		this.trigger.addEventListener('click', this.open, false);
 		this.nav.classList.remove(this.openClass);

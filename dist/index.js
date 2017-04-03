@@ -16,14 +16,14 @@ var Nav = function () {
 
 	// Include default values for options
 	function Nav(_ref) {
-		var _ref$nav = _ref.nav;
-		var nav = _ref$nav === undefined ? '.js-nav' : _ref$nav;
-		var _ref$trigger = _ref.trigger;
-		var trigger = _ref$trigger === undefined ? '.js-nav-trigger' : _ref$trigger;
-		var _ref$openClass = _ref.openClass;
-		var openClass = _ref$openClass === undefined ? 'is-open' : _ref$openClass;
-		var _ref$bodyClass = _ref.bodyClass;
-		var bodyClass = _ref$bodyClass === undefined ? 'js-mobile-nav-open' : _ref$bodyClass;
+		var _ref$nav = _ref.nav,
+		    nav = _ref$nav === undefined ? '.js-nav' : _ref$nav,
+		    _ref$trigger = _ref.trigger,
+		    trigger = _ref$trigger === undefined ? '.js-nav-trigger' : _ref$trigger,
+		    _ref$openClass = _ref.openClass,
+		    openClass = _ref$openClass === undefined ? 'is-open' : _ref$openClass,
+		    _ref$bodyClass = _ref.bodyClass,
+		    bodyClass = _ref$bodyClass === undefined ? 'js-mobile-nav-open' : _ref$bodyClass;
 
 		_classCallCheck(this, Nav);
 
@@ -47,7 +47,8 @@ var Nav = function () {
 
 	_createClass(Nav, [{
 		key: 'open',
-		value: function open() {
+		value: function open(e) {
+			e.preventDefault();
 			document.documentElement.classList.add(this.bodyClass);
 			this.nav.classList.add(this.openClass);
 			window.scrollTo(0, 0);
@@ -58,7 +59,8 @@ var Nav = function () {
 
 	}, {
 		key: 'close',
-		value: function close() {
+		value: function close(e) {
+			e.preventDefault();
 			this.trigger.removeEventListener('click', this.close, false);
 			this.trigger.addEventListener('click', this.open, false);
 			this.nav.classList.remove(this.openClass);
