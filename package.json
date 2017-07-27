@@ -1,25 +1,25 @@
 {
-  "name": "bluegg-nav",
-  "version": "0.0.3",
-  "description": "JS enabled responsive nav",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "node_modules/.bin/babel --plugins add-module-exports src/index.js > dist/index.js",
-    "prepublish": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bluegg/bluegg-nav.git"
-  },
-  "author": "bluegg",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Bluegg/bluegg-nav/issues"
-  },
-  "homepage": "https://github.com/Bluegg/bluegg-nav#readme",
-  "devDependencies": {
-    "babel-cli": "^6.10.1",
-    "babel-plugin-add-module-exports": "^0.1.2",
-    "babel-preset-es2015": "^6.9.0"
-  }
+	"name": "bluegg-nav",
+	"version": "0.0.4",
+	"description": "JS enabled responsive nav",
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "node_modules/.bin/babel --plugins add-module-exports src/index.js > dist/index.js",
+		"prepublish": "npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Bluegg/bluegg-nav.git"
+	},
+	"author": "bluegg",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Bluegg/bluegg-nav/issues"
+	},
+	"homepage": "https://github.com/Bluegg/bluegg-nav#readme",
+	"devDependencies": {
+		"babel-cli": "^6.10.1",
+		"babel-plugin-add-module-exports": "^0.1.2",
+		"babel-preset-es2015": "^6.9.0"
+	}
 }

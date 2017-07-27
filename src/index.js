@@ -3,10 +3,13 @@
  */
 
 class Nav {
-
 	// Include default values for options
-	constructor({nav = '.js-nav', trigger = '.js-nav-trigger', openClass = 'is-open', bodyClass = 'js-mobile-nav-open'}) {
-
+	constructor({
+		nav = '.js-nav',
+		trigger = '.js-nav-trigger',
+		openClass = 'is-open',
+		bodyClass = 'js-mobile-nav-open'
+	}) {
 		// Store the options
 		this.nav = document.querySelector(nav);
 		this.trigger = document.querySelector(trigger);
@@ -17,33 +20,51 @@ class Nav {
 		this.open = this.open.bind(this);
 		this.close = this.close.bind(this);
 		this.isNavRequired = this.isNavRequired.bind(this);
+		this.checkClickOutside = this.checkClickOutside.bind(this);
 
 		// Let's dance
 		this.init();
 	}
 
+	checkClickOutside(e) {
+		if (this.nav.contains(e.target)) {
+			console.log('clicked the nav', this.nav);
+		} else {
+			console.log('clicked outside', e.target);
+			// e.stopPropagation();
+			this.close();
+		}
+	}
+
 	// Add the class to the body, toggle the event listener
-	open(e) {
-		e.preventDefault();
+	open() {
+		console.log('open');
 		document.documentElement.classList.add(this.bodyClass);
 		this.nav.classList.add(this.openClass);
 		window.scrollTo(0, 0);
 		this.trigger.removeEventListener('click', this.open, false);
 		this.trigger.addEventListener('click', this.close, false);
+		setTimeout(() => {
+			document.addEventListener('click', this.checkClickOutside, false);
+		}, 0);
 	}
 	// Remove the class to the body, toggle the event listener
-	close(e) {
-		e.preventDefault();
+	close() {
+		console.log('close');
 		this.trigger.removeEventListener('click', this.close, false);
 		this.trigger.addEventListener('click', this.open, false);
 		this.nav.classList.remove(this.openClass);
 		document.documentElement.classList.remove(this.bodyClass);
+		document.removeEventListener('click', this.checkClickOutside, false);
 	}
 
 	// check if the toggle ishidden, if it is then we can assume the nav shouldn't be Javascript powered
 	isNavRequired() {
 		// If trigger is not visible, remove open class from body
-		if (this.trigger.style.display === 'none' || this.trigger.style.visibility === 'hidden') {
+		if (
+			this.trigger.style.display === 'none' ||
+			this.trigger.style.visibility === 'hidden'
+		) {
 			this.close();
 		}
 	}
@@ -67,8 +88,6 @@ class Nav {
 
 		// Check if we need to run
 		this.isNavRequired();
-
 	}
 }
-
 export default Nav;

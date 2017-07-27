@@ -13,7 +13,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 
 var Nav = function () {
-
 	// Include default values for options
 	function Nav(_ref) {
 		var _ref$nav = _ref.nav,
@@ -37,34 +36,52 @@ var Nav = function () {
 		this.open = this.open.bind(this);
 		this.close = this.close.bind(this);
 		this.isNavRequired = this.isNavRequired.bind(this);
+		this.checkClickOutside = this.checkClickOutside.bind(this);
 
 		// Let's dance
 		this.init();
 	}
 
-	// Add the class to the body, toggle the event listener
-
-
 	_createClass(Nav, [{
+		key: 'checkClickOutside',
+		value: function checkClickOutside(e) {
+			if (this.nav.contains(e.target)) {
+				console.log('clicked the nav', this.nav);
+			} else {
+				console.log('clicked outside', e.target);
+				// e.stopPropagation();
+				this.close();
+			}
+		}
+
+		// Add the class to the body, toggle the event listener
+
+	}, {
 		key: 'open',
-		value: function open(e) {
-			e.preventDefault();
+		value: function open() {
+			var _this = this;
+
+			console.log('open');
 			document.documentElement.classList.add(this.bodyClass);
 			this.nav.classList.add(this.openClass);
 			window.scrollTo(0, 0);
 			this.trigger.removeEventListener('click', this.open, false);
 			this.trigger.addEventListener('click', this.close, false);
+			setTimeout(function () {
+				document.addEventListener('click', _this.checkClickOutside, false);
+			}, 0);
 		}
 		// Remove the class to the body, toggle the event listener
 
 	}, {
 		key: 'close',
-		value: function close(e) {
-			e.preventDefault();
+		value: function close() {
+			console.log('close');
 			this.trigger.removeEventListener('click', this.close, false);
 			this.trigger.addEventListener('click', this.open, false);
 			this.nav.classList.remove(this.openClass);
 			document.documentElement.classList.remove(this.bodyClass);
+			document.removeEventListener('click', this.checkClickOutside, false);
 		}
 
 		// check if the toggle ishidden, if it is then we can assume the nav shouldn't be Javascript powered
@@ -80,7 +97,7 @@ var Nav = function () {
 	}, {
 		key: 'init',
 		value: function init() {
-			var _this = this;
+			var _this2 = this;
 
 			// Open nav on trigger click
 			this.trigger.addEventListener('click', this.open, false);
@@ -95,7 +112,7 @@ var Nav = function () {
 					clearTimeout(to);
 				}
 				// Fire!
-				to = setTimeout(_this.isNavRequired, 200);
+				to = setTimeout(_this2.isNavRequired, 200);
 			});
 
 			// Check if we need to run
